@@ -848,4 +848,25 @@ $('#play').onclick=start;$('#replay').onclick=start;
 $('#mute').onclick=function(){muted=!muted;if(master)master.gain.value=muted?0:.8;this.textContent=muted?'🔇 소리 켜기':'🔊 소리 끄기'};
 })();
 </script>
+<style>
+.card h3 .emoji{display:grid;place-items:center;width:84px;height:84px;margin:0 auto 10px;border-radius:50%;background:linear-gradient(145deg,#fff,#ffd6ea);font-size:46px;box-shadow:var(--clay)}
+.card h3{text-align:center}
+.card>p:not(.tip){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:17px}
+.card.open>p:not(.tip){-webkit-line-clamp:unset}
+.more{display:none}.card.open .more{display:block}
+.mbtn{display:block;margin:6px auto 0;border:0;background:#ffe0ef;color:var(--pink-d);border-radius:999px;padding:4px 16px;font-size:15px;cursor:pointer;box-shadow:inset 0 2px 4px #fff,0 3px 6px rgba(214,69,127,.15)}
+.card svg.pose{background:linear-gradient(180deg,#ffe9f4,#efe3ff);max-width:150px;height:150px}
+.sec .lead{font-size:18px}
+ol.steps li span{font-size:16px;display:block}
+</style>
+<script>
+(()=>{
+const pose={plie:[40,-40,26,-26,18],relev:[20,-20,1,-1,-14],arab:[100,-72,3,-98,0],tendu:[28,-28,4,-38,0],passe:[60,-60,4,-70,0],jete:[60,-100,75,-75,-24],pirou:[160,-160,2,-2,-10],port:[70,-70,4,-4,0],stand:[28,-28,4,-4,0],jump:[40,-40,30,-30,-22]};
+const D=a=>{const t=(p,r)=>'translate('+p+') rotate('+r+')';return '<svg class="pose" viewBox="0 20 200 280"><g transform="translate(0,'+a[4]+')"><g transform="'+t('95,170',a[2])+'"><line y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/></g><g transform="'+t('105,170',a[3])+'"><line y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/></g><path d="M100 98 L100 168" stroke="#ff6fae" stroke-width="20" stroke-linecap="round"/><path d="M52 172 Q100 150 148 172 Q100 190 52 172Z" fill="#fff" stroke="#f5b4d3" stroke-width="3"/><g transform="'+t('96,100',a[0])+'"><line y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g><g transform="'+t('104,100',a[1])+'"><line y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g><circle cx="100" cy="68" r="22" fill="#ffd9bf"/><circle cx="100" cy="40" r="11" fill="#6b3a52"/><circle cx="93" cy="72" r="2.5" fill="#5a2a48"/><circle cx="107" cy="72" r="2.5" fill="#5a2a48"/><path d="M95 80 Q100 85 105 80" stroke="#d6457f" stroke-width="2" fill="none"/></g></svg>'};
+const map=[['플리에','plie'],['를르베','relev'],['아라베스크','arab'],['탄듀','tendu'],['파세','passe'],['주테','jete'],['피루엣','pirou'],['소테','jump'],['아상블레','jump'],['샹주망','jump'],['샹즈망','jump'],['파 드 부레','relev'],['파드부레','relev'],['시손','jump'],['데가제','tendu'],['프라페','tendu'],['롱드장브','tendu'],['앙바','port'],['앙아반','port'],['앙오','pirou']];
+document.querySelectorAll('#moves .card,#positions .card').forEach(c=>{const h=c.querySelector('h3').textContent;if(c.querySelector('svg'))return;const m=map.find(x=>h.includes(x[0]));if(m)c.insertAdjacentHTML('afterbegin',D(pose[m[1]]))});
+document.querySelectorAll('.card').forEach(c=>{const first=c.querySelector(':scope>p:not(.tip)');const rest=[...c.children].filter(e=>e!==first&&e.tagName!=='H3'&&e.tagName!=='SVG'&&!(e.tagName==='svg'));if(!rest.length&&!(first&&first.textContent.length>90))return;
+ const w=document.createElement('div');w.className='more';rest.forEach(e=>w.appendChild(e));c.appendChild(w);const b=document.createElement('button');b.className='mbtn';b.textContent='더 보기 ▾';b.onclick=()=>{c.classList.toggle('open');b.textContent=c.classList.contains('open')?'접기 ▴':'더 보기 ▾'};c.appendChild(b)});
+})();
+</script>
 </body></html>
