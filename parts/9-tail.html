@@ -1,0 +1,53 @@
+</div>
+<footer>🩰 발레 101 · 오늘 한 걸음이 내일의 아라베스크 🩰</footer>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),T=30;
+const FEET={1:[-22,22,0,0],2:[-48,48,0,0],3:[-6,6,0,0],4:[-8,8,-12,12],5:[-4,4,0,0]};
+$('#posrow').innerHTML=[1,2,3,4,5].map(n=>{const [a,b,c,d]=FEET[n];return '<div class="pos"><svg viewBox="0 0 120 60"><line x1="6" y1="54" x2="114" y2="54" stroke="#d6457f" stroke-width="2"/><ellipse cx="'+(60+a)+'" cy="'+(30+c)+'" rx="10" ry="18" fill="#ff9ec7" stroke="#d6457f" stroke-width="2"/><ellipse cx="'+(60+b)+'" cy="'+(30+d)+'" rx="10" ry="18" fill="#ff9ec7" stroke="#d6457f" stroke-width="2"/></svg>'+n+'번</div>'}).join('');
+for(let i=0;i<14;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','💖','⭐','🌸'][i%4];s.style.left=Math.random()*94+'%';s.style.top=Math.random()*88+'%';s.style.animationDelay=Math.random()*2+'s';$('#stage').prepend(s)}
+// 포즈: [왼팔,오른팔,왼다리,오른다리,몸 내림]
+const P={stand:[28,-28,4,-4,0],plie:[40,-40,26,-26,18],up:[20,-20,1,-1,-14],arab:[100,-72,3,-98,0],wave:[150,-150,3,-3,0]};
+let cur=P.stand.slice();
+function setPose(a){cur=a;const t=(id,p,r)=>$('#'+id).setAttribute('transform','translate('+p+') rotate('+r+')');
+ t('armL','96,100',a[0]);t('armR','104,100',a[1]);t('legL','95,170',a[2]);t('legR','105,170',a[3]);$('#body').setAttribute('transform','translate(0,'+a[4]+')')}
+setPose(P.stand);
+const lerp=(a,b,k)=>a.map((v,i)=>v+(b[i]-v)*k),ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+const SC=[[0,0],[4,1],[9,2],[14,3],[19,4],[25,5],[28,6]];
+const MV=[[19,'플리에','무릎을 사뿐히 굽혀요','plie'],[21,'를르베','발끝으로 쏘옥 올라가요','up'],[23,'아라베스크','한 다리를 뒤로 길게 쭉!','arab']];
+const DAN=[[0,0],[4,1],[9,0],[19,1],[25,0],[28,1]];
+let ac,master,muted=false,t0=0,raf;
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function note(m,when,dur,vol){const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=hz(m);g.gain.setValueAtTime(0,when);g.gain.linearRampToValueAtTime(vol,when+.02);g.gain.exponentialRampToValueAtTime(.0008,when+dur);o.connect(g);g.connect(master);o.start(when);o.stop(when+dur+.05);
+ const o2=ac.createOscillator(),g2=ac.createGain();o2.type='sine';o2.frequency.value=hz(m)*2;g2.gain.setValueAtTime(vol*.35,when);g2.gain.exponentialRampToValueAtTime(.0008,when+dur*.6);o2.connect(g2);g2.connect(master);o2.start(when);o2.stop(when+dur)}
+function music(){const beat=60/96,ch=[[57,60,64],[57,60,65],[55,60,64],[56,59,64]],bs=[45,41,48,40];
+ const p1=[[81,76,72],[77,81,84],[79,76,72],[71,76,80]],p2=[[84,81,76],[77,81,77],[79,84,79],[80,83,76]];
+ const s=ac.currentTime+.15;
+ for(let bar=0;bar<16;bar++){const c=bar%4,cyc=(bar/4)|0,w=s+bar*3*beat,mel=(cyc%2?p2:p1)[c];
+  if(bar===15){[45,57,60,64,81].forEach((m,i)=>note(m,w,3.6,i?.06:.14));continue}
+  note(bs[c],w,beat*2.6,.16);ch[c].forEach(m=>{note(m,w+beat,beat*.9,.05);note(m,w+2*beat,beat*.9,.05)});
+  mel.forEach((m,i)=>note(m,w+i*beat,beat*1.8,.12));
+  if(cyc>=2)mel.forEach((m,i)=>note(m+12,w+i*beat+beat/2,beat*.6,.04))}}
+function frame(){const t=ac?ac.currentTime-t0:(performance.now()-t0)/1000;
+ if(t>=T){stop(true);return}
+ if(t<0){raf=requestAnimationFrame(frame);return}
+ $('#bar i').style.width=t/T*100+'%';
+ let si=0;SC.forEach((s,i)=>{if(t>=s[0])si=i});
+ document.querySelectorAll('.scene').forEach((e,i)=>{const on=i==SC[si][1];if(on&&!e.classList.contains('on')){e.classList.add('on');e.querySelectorAll('.pop>*,.bubble,.pos').forEach(n=>{n.style.animation='none';n.offsetHeight;n.style.animation=''})}else if(!on)e.classList.remove('on')});
+ let d=0;DAN.forEach(x=>{if(t>=x[0])d=x[1]});$('#dancer').style.opacity=d;
+ let target=P.stand;
+ if(t>=4&&t<9){const k=(t-4)%2;target=k<1?lerp(P.stand,P.wave,ease(k)):lerp(P.wave,P.stand,ease(k-1))}
+ else if(t>=19&&t<25){let m=MV[0];MV.forEach(x=>{if(t>=x[0])m=x});$('#moveName').textContent=m[1];$('#moveSub').textContent=m[2];target=lerp(P.stand,P[m[3]],ease(Math.min(1,(t-m[0])/.9)))}
+ else if(t>=28){target=lerp(P.stand,P.wave,Math.abs(Math.sin((t-28)/1.5*Math.PI)))}
+ setPose(lerp(cur,target,.25));
+ raf=requestAnimationFrame(frame)}
+function start(){stop();$('#play').style.display='none';
+ try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();master=ac.createGain();master.gain.value=muted?0:.8;master.connect(ac.destination);t0=ac.currentTime+.15;music()}catch(e){ac=null;t0=performance.now()}
+ frame()}
+function stop(end){cancelAnimationFrame(raf);if(ac&&master){try{master.gain.value=0;master.disconnect()}catch(e){}}
+ if(end){$('#bar i').style.width='100%';$('#play').style.display='grid';$('#play span').innerHTML='<b>↻</b>한 번 더 볼까요?'}}
+$('#play').onclick=start;$('#replay').onclick=start;
+$('#mute').onclick=function(){muted=!muted;if(master)master.gain.value=muted?0:.8;this.textContent=muted?'🔇 소리 켜기':'🔊 소리 끄기'};
+})();
+</script>
+</body></html>

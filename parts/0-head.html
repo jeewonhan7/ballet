@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>발레 101 · 처음 만나는 발레 백과사전</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffeaf4;--bg2:#f3e8ff;--pink:#ff8fc0;--pink-d:#d6457f;--lav:#c9b6ff;--mint:#b8f0dc;--sun:#ffe8a3;--ink:#5a2a48;--card:#fff7fb;--clay:0 14px 24px rgba(214,69,127,.18),0 4px 8px rgba(214,69,127,.12),inset 0 -8px 12px rgba(255,143,192,.22),inset 0 8px 12px rgba(255,255,255,.95)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Gowun Dodum',sans-serif;font-size:18px;line-height:1.75;color:var(--ink);background:radial-gradient(circle at 10% 0,#fff 0,transparent 40%),linear-gradient(160deg,var(--bg),var(--bg2));min-height:100vh}
+h1,h2,h3,.pill,nav a,button{font-family:'Jua',sans-serif;font-weight:400}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+nav{position:sticky;top:10px;z-index:20;margin:14px auto 0;max-width:1080px;padding:0 16px}
+nav div{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;background:var(--card);border-radius:999px;box-shadow:var(--clay);scrollbar-width:none}
+nav a{flex:none;text-decoration:none;color:var(--pink-d);padding:6px 14px;border-radius:999px;background:#ffe0ef;font-size:16px;box-shadow:inset 0 3px 5px #fff,0 3px 6px rgba(214,69,127,.15)}
+nav a:hover{background:var(--pink);color:#fff}
+header.top{text-align:center;padding:26px 0 8px}
+header.top h1{font-size:clamp(34px,7vw,64px);margin:0;color:var(--pink-d);text-shadow:0 4px 0 #fff,0 8px 14px rgba(214,69,127,.25)}
+header.top p{margin:6px 0 0}
+#stage{position:relative;aspect-ratio:16/9;border-radius:36px;overflow:hidden;background:linear-gradient(180deg,#ffd3e8,#e5d4ff 70%,#d8c3ff);box-shadow:var(--clay),0 0 0 8px #fff;margin:18px 0 8px;user-select:none}
+#stage .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transition:opacity .6s;padding:3%;pointer-events:none}
+#stage .scene.on{opacity:1}
+.big{font-family:'Jua';font-size:clamp(26px,6.2vw,66px);color:#fff;line-height:1.15;text-shadow:0 4px 0 var(--pink-d),0 10px 16px rgba(120,30,80,.3);margin:0}
+.sub{font-family:'Jua';font-size:clamp(14px,2.6vw,28px);color:#7a2f5e;margin:8px 0 0;background:#ffffffb0;border-radius:999px;padding:2px 18px}
+.pop>*{animation:pop .7s cubic-bezier(.3,1.6,.5,1) both}.pop>*:nth-child(2){animation-delay:.25s}
+@keyframes pop{from{transform:scale(0) rotate(-12deg);opacity:0}to{transform:none;opacity:1}}
+.row{display:flex;gap:2.5%;justify-content:center;margin-top:2%}
+.bubble{width:clamp(48px,11vw,120px);aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:clamp(24px,5.5vw,60px);box-shadow:var(--clay);animation:bob 1.6s ease-in-out infinite}
+.bubble:nth-child(2n){animation-delay:.4s}.bubble:nth-child(3n){animation-delay:.8s}
+@keyframes bob{50%{transform:translateY(-12px)}}
+.pos svg{width:clamp(50px,11vw,120px)}
+.pos{display:flex;flex-direction:column;align-items:center;font-family:'Jua';color:#7a2f5e;font-size:clamp(12px,2.2vw,24px);background:#fff;border-radius:20px;padding:6px 10px;box-shadow:var(--clay)}
+#dancer{position:absolute;right:4%;bottom:0;height:78%;filter:drop-shadow(0 6px 6px rgba(120,30,80,.25));transition:opacity .6s}
+.sparkle{position:absolute;font-size:clamp(14px,3vw,30px);animation:tw 2s infinite}
+@keyframes tw{50%{transform:scale(1.6) rotate(25deg);opacity:.4}}
+#play{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:#ffd3e8cc;backdrop-filter:blur(3px);cursor:pointer;border:0;width:100%;color:var(--pink-d)}
+#play span{display:block;font-size:clamp(16px,3.4vw,34px);background:#fff;border-radius:36px;padding:14px 34px;box-shadow:var(--clay)}
+#play b{font-size:clamp(50px,10vw,100px);display:block;line-height:1.1;font-weight:400}
+#bar{height:10px;background:#fff;border-radius:99px;box-shadow:inset 0 2px 4px rgba(214,69,127,.3);overflow:hidden;margin:6px 6px 0}
+#bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:99px}
+.ctl{display:flex;gap:10px;justify-content:center;margin:10px 0 0}
+button.c{border:0;background:var(--card);color:var(--pink-d);padding:8px 20px;border-radius:999px;font-size:17px;cursor:pointer;box-shadow:var(--clay)}
+button.c:active{transform:translateY(2px)}
+.sec{padding:46px 0 6px}
+.sec h2{font-size:clamp(28px,5vw,42px);margin:0 0 6px;color:var(--pink-d);text-shadow:0 3px 0 #fff}
+.emoji{margin-right:.3em}
+.lead{font-size:20px;margin:0 0 18px;background:#ffffff90;border-radius:22px;padding:10px 18px;display:inline-block;box-shadow:inset 0 2px 6px #fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
+.card{background:var(--card);border-radius:30px;padding:22px 22px 18px;box-shadow:var(--clay);transition:transform .25s}
+.card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.card h3{margin:0 0 8px;font-size:23px;color:var(--pink-d);line-height:1.3}
+.card p{margin:0 0 10px}.card ul{margin:0 0 10px;padding-left:1.2em}.card li{margin:3px 0}
+.card svg{display:block;width:100%;max-width:180px;margin:0 auto 10px;background:#ffe9f4;border-radius:18px}
+.pill{display:inline-block;font-size:14px;line-height:1.5;padding:1px 12px;border-radius:999px;background:var(--lav);color:#fff;vertical-align:middle;margin-left:4px;box-shadow:inset 0 2px 3px #ffffff90}
+.tip{background:var(--sun);border-radius:18px;padding:8px 14px;font-size:16px;box-shadow:inset 0 2px 4px #fff}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0 0 22px;display:grid;gap:14px}
+ol.steps li{counter-increment:s;position:relative;background:var(--card);border-radius:28px;padding:16px 20px 16px 78px;box-shadow:var(--clay)}
+ol.steps li::before{content:counter(s);position:absolute;left:16px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:linear-gradient(145deg,#ffb3d6,var(--pink));color:#fff;font:26px 'Jua';display:grid;place-items:center;box-shadow:var(--clay)}
+ol.steps b{display:block;color:var(--pink-d);font-family:'Jua';font-size:21px;font-weight:400}
+footer{text-align:center;padding:50px 16px 70px;color:var(--pink-d);font-family:'Jua'}
+@media(max-width:600px){body{font-size:17px}.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav><div><a href="#top">🎬 영상</a><a href="#what">발레란?</a><a href="#gear">준비물</a><a href="#positions">발 모양</a><a href="#moves">동작</a><a href="#roadmap">배우는 순서</a><a href="#works">유명 작품</a><a href="#faq">Q&amp;A</a></div></nav>
+<div class="wrap" id="top">
+<header class="top"><h1>🩰 발레 101 🩰</h1><p>처음 발레를 만나는 친구를 위한 쉬운 백과사전</p></header>
+
+<div id="stage" aria-label="30초 발레 소개 영상">
+ <button id="play" aria-label="영상 재생"><span><b>▶</b>누르면 30초 영상이 시작돼요 (소리 ON 🔊)</span></button>
+ <div class="scene on" id="s0"><div class="pop"><p class="big">발레 101</p><p class="sub">처음 만나는 발레 이야기 ✨</p></div></div>
+ <div class="scene" id="s1"><div class="pop"><p class="big">발레가 뭐예요?</p><p class="sub">몸으로 들려주는 동화책 📖</p></div><div class="row"><div class="bubble">🏰</div><div class="bubble">🦢</div><div class="bubble">🎶</div></div></div>
+ <div class="scene" id="s2"><p class="big" style="font-size:clamp(22px,5vw,50px)">발 모양은 딱 5가지!</p><div class="row" id="posrow"></div></div>
+ <div class="scene" id="s3"><p class="big" style="font-size:clamp(22px,5vw,50px)">준비물을 챙겨요</p><div class="row"><div class="bubble">👚</div><div class="bubble">🧦</div><div class="bubble">🩰</div><div class="bubble">🎀</div></div><p class="sub">레오타드 · 타이츠 · 슈즈 · 머리 끈</p></div>
+ <div class="scene" id="s4" style="align-items:flex-start;justify-content:flex-start;text-align:left;padding:5% 6%"><p class="big" style="font-size:clamp(22px,5vw,50px)" id="moveName">플리에</p><p class="sub" id="moveSub">무릎을 사뿐히 굽혀요</p></div>
+ <div class="scene" id="s5"><p class="big" style="font-size:clamp(20px,4.6vw,48px)">유명한 작품도 만나요</p><div class="row"><div class="bubble">🦢</div><div class="bubble">🥜</div><div class="bubble">🌹</div><div class="bubble">👑</div></div><p class="sub">백조의 호수 · 호두까기 인형 · 지젤</p></div>
+ <div class="scene" id="s6"><div class="pop"><p class="big">우리 같이 시작해요!</p><p class="sub">발레는 누구나 할 수 있어요 💖</p></div></div>
+ <svg id="dancer" viewBox="0 0 200 300" style="opacity:0"><g id="body">
+  <g id="legL"><line x1="0" y1="0" x2="0" y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/><ellipse cx="0" cy="108" rx="8" ry="5" fill="#ff6fae"/></g>
+  <g id="legR"><line x1="0" y1="0" x2="0" y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/><ellipse cx="0" cy="108" rx="8" ry="5" fill="#ff6fae"/></g>
+  <path d="M100 98 L100 168" stroke="#ff6fae" stroke-width="20" stroke-linecap="round"/>
+  <path d="M52 172 Q100 150 148 172 Q100 190 52 172Z" fill="#fff" stroke="#f5b4d3" stroke-width="3"/>
+  <g id="armL"><line x1="0" y1="0" x2="0" y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g>
+  <g id="armR"><line x1="0" y1="0" x2="0" y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g>
+  <circle cx="100" cy="68" r="22" fill="#ffd9bf"/><circle cx="100" cy="40" r="11" fill="#6b3a52"/><path d="M78 66 Q100 36 122 66 Q100 52 78 66Z" fill="#6b3a52"/>
+  <circle cx="93" cy="72" r="2.5" fill="#5a2a48"/><circle cx="107" cy="72" r="2.5" fill="#5a2a48"/><circle cx="87" cy="79" r="4" fill="#ff9ec7" opacity=".6"/><circle cx="113" cy="79" r="4" fill="#ff9ec7" opacity=".6"/>
+  <path d="M95 80 Q100 85 105 80" stroke="#d6457f" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="116" cy="36" r="6" fill="#ff6fae"/>
+ </g></svg>
+</div>
+<div id="bar"><i></i></div>
+<div class="ctl"><button class="c" id="replay">↻ 다시 보기</button><button class="c" id="mute">🔊 소리 끄기</button></div>
