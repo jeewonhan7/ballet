@@ -78,17 +78,7 @@ footer{text-align:center;padding:50px 16px 70px;color:var(--pink-d);font-family:
  <div class="scene" id="s4" style="align-items:flex-start;justify-content:flex-start;text-align:left;padding:5% 6%"><p class="big" style="font-size:clamp(22px,5vw,50px)" id="moveName">플리에</p><p class="sub" id="moveSub">무릎을 사뿐히 굽혀요</p></div>
  <div class="scene" id="s5"><p class="big" style="font-size:clamp(20px,4.6vw,48px)">유명한 작품도 만나요</p><div class="row"><div class="bubble">🦢</div><div class="bubble">🥜</div><div class="bubble">🌹</div><div class="bubble">👑</div></div><p class="sub">백조의 호수 · 호두까기 인형 · 지젤</p></div>
  <div class="scene" id="s6"><div class="pop"><p class="big">우리 같이 시작해요!</p><p class="sub">발레는 누구나 할 수 있어요 💖</p></div></div>
- <svg id="dancer" viewBox="0 0 200 300" style="opacity:0"><g id="body">
-  <g id="legL"><line x1="0" y1="0" x2="0" y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/><ellipse cx="0" cy="108" rx="8" ry="5" fill="#ff6fae"/></g>
-  <g id="legR"><line x1="0" y1="0" x2="0" y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/><ellipse cx="0" cy="108" rx="8" ry="5" fill="#ff6fae"/></g>
-  <path d="M100 98 L100 168" stroke="#ff6fae" stroke-width="20" stroke-linecap="round"/>
-  <path d="M52 172 Q100 150 148 172 Q100 190 52 172Z" fill="#fff" stroke="#f5b4d3" stroke-width="3"/>
-  <g id="armL"><line x1="0" y1="0" x2="0" y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g>
-  <g id="armR"><line x1="0" y1="0" x2="0" y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g>
-  <circle cx="100" cy="68" r="22" fill="#ffd9bf"/><circle cx="100" cy="40" r="11" fill="#6b3a52"/><path d="M78 66 Q100 36 122 66 Q100 52 78 66Z" fill="#6b3a52"/>
-  <circle cx="93" cy="72" r="2.5" fill="#5a2a48"/><circle cx="107" cy="72" r="2.5" fill="#5a2a48"/><circle cx="87" cy="79" r="4" fill="#ff9ec7" opacity=".6"/><circle cx="113" cy="79" r="4" fill="#ff9ec7" opacity=".6"/>
-  <path d="M95 80 Q100 85 105 80" stroke="#d6457f" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="116" cy="36" r="6" fill="#ff6fae"/>
- </g></svg>
+ <svg id="dancer" viewBox="0 0 200 300" style="opacity:0"></svg>
 </div>
 <div id="bar"><i></i></div>
 <div class="ctl"><button class="c" id="replay">↻ 다시 보기</button><button class="c" id="mute">🔊 소리 끄기</button></div>
@@ -799,17 +789,34 @@ footer{text-align:center;padding:50px 16px 70px;color:var(--pink-d);font-family:
 </div>
 <footer>🩰 발레 101 · 오늘 한 걸음이 내일의 아라베스크 🩰</footer>
 <script>
+// 발레리나 그리기: 부드럽게 가늘어지는 팔다리, 굽는 관절, 뾰족한 발끝, 튀튀 치마
+window.BD=(()=>{
+const SK='#ffd9bf',TI='#ffb3d6',SL='#ff7fb5';
+const L=(len,a,b,c)=>'<path d="M'+(-a)+' 0 Q'+(-(a+b)*.62)+' '+len/2+' '+(-b)+' '+len+' L'+b+' '+len+' Q'+((a+b)*.62)+' '+len/2+' '+a+' 0Z" fill="'+c+'"/><circle r="'+a+'" fill="'+c+'"/><circle cy="'+len+'" r="'+b+'" fill="'+c+'"/>';
+const arm=k=>'<g class="sh'+k+'"><g>'+L(38,6,4.6,SK)+'</g><g class="el'+k+'" transform="translate(0,38)">'+L(36,4.6,3,SK)+'<ellipse cy="40" rx="3.4" ry="5.5" fill="'+SK+'"/></g></g>';
+const leg=k=>'<g class="hip'+k+'">'+L(52,11,7.6,TI)+'<g class="kn'+k+'" transform="translate(0,52)">'+L(52,7.6,4.6,TI)+'<g class="ft'+k+'" transform="translate(0,52)"><path d="M-4.8 -2 Q-3 12 0 24 Q3 12 4.8 -2Z" fill="'+SL+'"/><ellipse cx="0" cy="-1" rx="5" ry="4" fill="'+SL+'"/></g></g></g>';
+const markup=()=>'<g class="body">'+leg('L')+leg('R')+
+ '<path d="M84 94 Q100 87 116 94 L111 154 Q100 159 89 154Z" fill="#ff8fc0"/><path d="M90 100 Q100 106 110 100" stroke="#ffd1e6" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+ '<path d="M50 160 Q66 146 100 148 Q134 146 150 160 Q134 177 100 175 Q66 177 50 160Z" fill="#fff" stroke="#f5b4d3" stroke-width="2.5"/><path d="M62 160 Q100 168 138 160" stroke="#ffd1e6" stroke-width="3" fill="none"/><ellipse cx="100" cy="153" rx="24" ry="5" fill="#e9d9ff"/>'+
+ '<path d="M95 70 L95 90 L105 90 L105 70Z" fill="'+SK+'"/>'+
+ '<g transform="translate(85,97)">'+arm('L')+'</g><g transform="translate(115,97)">'+arm('R')+'</g>'+
+ '<circle cx="100" cy="52" r="19" fill="'+SK+'"/><path d="M80 50 Q82 30 100 31 Q118 30 120 50 Q112 40 100 41 Q88 40 80 50Z" fill="#6b3a52"/><circle cx="100" cy="27" r="10" fill="#6b3a52"/><circle cx="113" cy="25" r="5" fill="#ff6fae"/>'+
+ '<circle cx="93" cy="55" r="2.2" fill="#5a2a48"/><circle cx="107" cy="55" r="2.2" fill="#5a2a48"/><circle cx="88" cy="61" r="3.5" fill="#ff9ec7" opacity=".6"/><circle cx="112" cy="61" r="3.5" fill="#ff9ec7" opacity=".6"/><path d="M96 63 Q100 67 104 63" stroke="#d6457f" stroke-width="2" fill="none" stroke-linecap="round"/></g>';
+// 포즈 [왼어깨,왼팔꿈치,오른어깨,오른팔꿈치,왼엉덩이,왼무릎,오른엉덩이,오른무릎,왼발,오른발,내림]
+const P={stand:[20,-30,-20,30,3,0,-3,0,75,-75,0],plie:[22,-30,-22,30,38,-38,-38,38,75,-75,11],up:[158,-38,-158,38,2,0,-2,0,0,0,-14],arab:[108,-10,-62,18,2,0,-100,0,0,0,-8],tendu:[72,-12,-72,12,3,0,-34,0,75,0,0],passe:[62,-22,-62,22,2,0,-58,112,0,-20,-6],jete:[102,-8,-102,8,82,0,-82,0,0,0,-30],pirou:[138,-48,-138,48,2,0,-60,115,0,-20,-12],port:[72,-10,-72,10,3,0,-3,0,75,-75,0],jump:[28,-26,-28,26,6,0,-6,0,0,0,-26],wave:[150,-22,-26,34,3,0,-3,0,75,-75,0]};
+const R=(el,sel,tr)=>{const n=el.querySelector(sel);if(n)n.setAttribute('transform',tr)};
+const setPose=(el,a)=>{R(el,'.body','translate(0,'+a[10]+')');R(el,'.shL','rotate('+a[0]+')');R(el,'.elL','translate(0,38) rotate('+a[1]+')');R(el,'.shR','rotate('+a[2]+')');R(el,'.elR','translate(0,38) rotate('+a[3]+')');
+ R(el,'.hipL','translate(94,160) rotate('+a[4]+')');R(el,'.knL','translate(0,52) rotate('+a[5]+')');R(el,'.hipR','translate(106,160) rotate('+a[6]+')');R(el,'.knR','translate(0,52) rotate('+a[7]+')');R(el,'.ftL','translate(0,52) rotate('+a[8]+')');R(el,'.ftR','translate(0,52) rotate('+a[9]+')')};
+const mini=name=>{const s=document.createElement('div');s.innerHTML='<svg class="pose" viewBox="10 14 180 290">'+markup()+'</svg>';const e=s.firstChild;setPose(e,P[name]);return e};
+return {P,markup,setPose,mini}})();
 (()=>{
 const $=s=>document.querySelector(s),T=30;
 const FEET={1:[-22,22,0,0],2:[-48,48,0,0],3:[-6,6,0,0],4:[-8,8,-12,12],5:[-4,4,0,0]};
 $('#posrow').innerHTML=[1,2,3,4,5].map(n=>{const [a,b,c,d]=FEET[n];return '<div class="pos"><svg viewBox="0 0 120 60"><line x1="6" y1="54" x2="114" y2="54" stroke="#d6457f" stroke-width="2"/><ellipse cx="'+(60+a)+'" cy="'+(30+c)+'" rx="10" ry="18" fill="#ff9ec7" stroke="#d6457f" stroke-width="2"/><ellipse cx="'+(60+b)+'" cy="'+(30+d)+'" rx="10" ry="18" fill="#ff9ec7" stroke="#d6457f" stroke-width="2"/></svg>'+n+'번</div>'}).join('');
 for(let i=0;i<14;i++){const s=document.createElement('span');s.className='sparkle';s.textContent=['✨','💖','⭐','🌸'][i%4];s.style.left=Math.random()*94+'%';s.style.top=Math.random()*88+'%';s.style.animationDelay=Math.random()*2+'s';$('#stage').prepend(s)}
-// 포즈: [왼팔,오른팔,왼다리,오른다리,몸 내림]
-const P={stand:[28,-28,4,-4,0],plie:[40,-40,26,-26,18],up:[20,-20,1,-1,-14],arab:[100,-72,3,-98,0],wave:[150,-150,3,-3,0]};
-let cur=P.stand.slice();
-function setPose(a){cur=a;const t=(id,p,r)=>$('#'+id).setAttribute('transform','translate('+p+') rotate('+r+')');
- t('armL','96,100',a[0]);t('armR','104,100',a[1]);t('legL','95,170',a[2]);t('legR','105,170',a[3]);$('#body').setAttribute('transform','translate(0,'+a[4]+')')}
-setPose(P.stand);
+const dn=$('#dancer');dn.innerHTML=BD.markup();
+const P=BD.P;let cur=P.stand.slice();
+const setPose=a=>{cur=a;BD.setPose(dn,a)};setPose(P.stand);
 const lerp=(a,b,k)=>a.map((v,i)=>v+(b[i]-v)*k),ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
 const SC=[[0,0],[4,1],[9,2],[14,3],[19,4],[25,5],[28,6]];
 const MV=[[19,'플리에','무릎을 사뿐히 굽혀요','plie'],[21,'를르베','발끝으로 쏘옥 올라가요','up'],[23,'아라베스크','한 다리를 뒤로 길게 쭉!','arab']];
@@ -832,12 +839,12 @@ function frame(){const t=ac?ac.currentTime-t0:(performance.now()-t0)/1000;
  $('#bar i').style.width=t/T*100+'%';
  let si=0;SC.forEach((s,i)=>{if(t>=s[0])si=i});
  document.querySelectorAll('.scene').forEach((e,i)=>{const on=i==SC[si][1];if(on&&!e.classList.contains('on')){e.classList.add('on');e.querySelectorAll('.pop>*,.bubble,.pos').forEach(n=>{n.style.animation='none';n.offsetHeight;n.style.animation=''})}else if(!on)e.classList.remove('on')});
- let d=0;DAN.forEach(x=>{if(t>=x[0])d=x[1]});$('#dancer').style.opacity=d;
+ let d=0;DAN.forEach(x=>{if(t>=x[0])d=x[1]});dn.style.opacity=d;
  let target=P.stand;
  if(t>=4&&t<9){const k=(t-4)%2;target=k<1?lerp(P.stand,P.wave,ease(k)):lerp(P.wave,P.stand,ease(k-1))}
  else if(t>=19&&t<25){let m=MV[0];MV.forEach(x=>{if(t>=x[0])m=x});$('#moveName').textContent=m[1];$('#moveSub').textContent=m[2];target=lerp(P.stand,P[m[3]],ease(Math.min(1,(t-m[0])/.9)))}
  else if(t>=28){target=lerp(P.stand,P.wave,Math.abs(Math.sin((t-28)/1.5*Math.PI)))}
- setPose(lerp(cur,target,.25));
+ setPose(lerp(cur,target,.2));
  raf=requestAnimationFrame(frame)}
 function start(){stop();$('#play').style.display='none';
  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();master=ac.createGain();master.gain.value=muted?0:.8;master.connect(ac.destination);t0=ac.currentTime+.15;music()}catch(e){ac=null;t0=performance.now()}
@@ -855,17 +862,15 @@ $('#mute').onclick=function(){muted=!muted;if(master)master.gain.value=muted?0:.
 .card.open>p:not(.tip){-webkit-line-clamp:unset}
 .more{display:none}.card.open .more{display:block}
 .mbtn{display:block;margin:6px auto 0;border:0;background:#ffe0ef;color:var(--pink-d);border-radius:999px;padding:4px 16px;font-size:15px;cursor:pointer;box-shadow:inset 0 2px 4px #fff,0 3px 6px rgba(214,69,127,.15)}
-.card svg.pose{background:linear-gradient(180deg,#ffe9f4,#efe3ff);max-width:150px;height:150px}
+.card svg.pose{background:linear-gradient(180deg,#ffe9f4,#efe3ff);max-width:170px;height:190px}
 .sec .lead{font-size:18px}
 ol.steps li span{font-size:16px;display:block}
 </style>
 <script>
 (()=>{
-const pose={plie:[40,-40,26,-26,18],relev:[20,-20,1,-1,-14],arab:[100,-72,3,-98,0],tendu:[28,-28,4,-38,0],passe:[60,-60,4,-70,0],jete:[60,-100,75,-75,-24],pirou:[160,-160,2,-2,-10],port:[70,-70,4,-4,0],stand:[28,-28,4,-4,0],jump:[40,-40,30,-30,-22]};
-const D=a=>{const t=(p,r)=>'translate('+p+') rotate('+r+')';return '<svg class="pose" viewBox="0 20 200 280"><g transform="translate(0,'+a[4]+')"><g transform="'+t('95,170',a[2])+'"><line y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/></g><g transform="'+t('105,170',a[3])+'"><line y2="105" stroke="#ff9ec7" stroke-width="12" stroke-linecap="round"/></g><path d="M100 98 L100 168" stroke="#ff6fae" stroke-width="20" stroke-linecap="round"/><path d="M52 172 Q100 150 148 172 Q100 190 52 172Z" fill="#fff" stroke="#f5b4d3" stroke-width="3"/><g transform="'+t('96,100',a[0])+'"><line y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g><g transform="'+t('104,100',a[1])+'"><line y2="70" stroke="#ffd9bf" stroke-width="9" stroke-linecap="round"/></g><circle cx="100" cy="68" r="22" fill="#ffd9bf"/><circle cx="100" cy="40" r="11" fill="#6b3a52"/><circle cx="93" cy="72" r="2.5" fill="#5a2a48"/><circle cx="107" cy="72" r="2.5" fill="#5a2a48"/><path d="M95 80 Q100 85 105 80" stroke="#d6457f" stroke-width="2" fill="none"/></g></svg>'};
-const map=[['플리에','plie'],['를르베','relev'],['아라베스크','arab'],['탄듀','tendu'],['파세','passe'],['주테','jete'],['피루엣','pirou'],['소테','jump'],['아상블레','jump'],['샹주망','jump'],['샹즈망','jump'],['파 드 부레','relev'],['파드부레','relev'],['시손','jump'],['데가제','tendu'],['프라페','tendu'],['롱드장브','tendu'],['앙바','port'],['앙아반','port'],['앙오','pirou']];
-document.querySelectorAll('#moves .card,#positions .card').forEach(c=>{const h=c.querySelector('h3').textContent;if(c.querySelector('svg'))return;const m=map.find(x=>h.includes(x[0]));if(m)c.insertAdjacentHTML('afterbegin',D(pose[m[1]]))});
-document.querySelectorAll('.card').forEach(c=>{const first=c.querySelector(':scope>p:not(.tip)');const rest=[...c.children].filter(e=>e!==first&&e.tagName!=='H3'&&e.tagName!=='SVG'&&!(e.tagName==='svg'));if(!rest.length&&!(first&&first.textContent.length>90))return;
+const map=[['플리에','plie'],['를르베','up'],['아라베스크','arab'],['탄듀','tendu'],['파세','passe'],['주테','jete'],['피루엣','pirou'],['소테','jump'],['아상블레','jump'],['샹주망','jump'],['샹즈망','jump'],['파 드 부레','up'],['파드부레','up'],['시손','jump'],['데가제','tendu'],['프라페','tendu'],['롱드장브','tendu'],['앙바','port'],['앙아반','port'],['앙오','wave']];
+document.querySelectorAll('#moves .card,#positions .card').forEach(c=>{const h=c.querySelector('h3').textContent;if(c.querySelector('svg'))return;const m=map.find(x=>h.includes(x[0]));if(m)c.insertBefore(BD.mini(m[1]),c.firstChild)});
+document.querySelectorAll('.card').forEach(c=>{const first=c.querySelector(':scope>p:not(.tip)');const rest=[...c.children].filter(e=>e!==first&&e.tagName!=='H3'&&e.tagName.toLowerCase()!=='svg');if(!rest.length&&!(first&&first.textContent.length>90))return;
  const w=document.createElement('div');w.className='more';rest.forEach(e=>w.appendChild(e));c.appendChild(w);const b=document.createElement('button');b.className='mbtn';b.textContent='더 보기 ▾';b.onclick=()=>{c.classList.toggle('open');b.textContent=c.classList.contains('open')?'접기 ▴':'더 보기 ▾'};c.appendChild(b)});
 })();
 </script>
