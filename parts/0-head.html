@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>발레 101 · 처음 만나는 발레 백과사전</title>
+<title>백조를 꿈꾸는 오리를 위한 발레 가이드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
@@ -65,19 +65,16 @@ footer{text-align:center;padding:50px 16px 70px;color:var(--pink-d);font-family:
 </style>
 </head>
 <body>
-<nav><div><a href="#top">🎬 영상</a><a href="#what">발레란?</a><a href="#gear">준비물</a><a href="#positions">발 모양</a><a href="#moves">동작</a><a href="#arms">팔 동작</a><a href="#warmup">웜업</a><a href="#roadmap">배우는 순서</a><a href="#works">유명 작품</a><a href="#faq">Q&amp;A</a></div></nav>
+<nav><div><a href="#top">🎬 영상</a><a href="#what">발레란?</a><a href="#gear">준비물</a><a href="#positions">발 모양</a><a href="#moves">동작</a><a href="#barcenter">바·센터</a><a href="#arms">팔 동작</a><a href="#warmup">웜업</a><a href="#roadmap">배우는 순서</a><a href="#works">유명 작품</a><a href="#faq">Q&amp;A</a></div></nav>
 <div class="wrap" id="top">
-<header class="top"><h1>🩰 발레 101 🩰</h1><p>처음 발레를 만나는 친구를 위한 쉬운 백과사전</p></header>
+<header class="top"><h1>🦆 백조를 꿈꾸는 오리를 위한 발레 가이드 🦢</h1><p>처음 시작하는 취미 발레 101</p></header>
 
-<div id="stage" aria-label="30초 발레 소개 영상">
+<div id="stage" aria-label="30초 발레 무브먼트 영상">
  <button id="play" aria-label="영상 재생"><span><b>▶</b>누르면 30초 영상이 시작돼요 (소리 ON 🔊)</span></button>
- <div class="scene on" id="s0"><div class="pop"><p class="big">발레 101</p><p class="sub">처음 만나는 발레 이야기 ✨</p></div></div>
- <div class="scene" id="s1"><div class="pop"><p class="big">발레가 뭐예요?</p><p class="sub">몸으로 들려주는 동화책 📖</p></div><div class="row"><div class="bubble">🏰</div><div class="bubble">🦢</div><div class="bubble">🎶</div></div></div>
- <div class="scene" id="s2"><p class="big" style="font-size:clamp(22px,5vw,50px)">발 모양은 딱 5가지!</p><div class="row" id="posrow"></div></div>
- <div class="scene" id="s3"><p class="big" style="font-size:clamp(22px,5vw,50px)">준비물을 챙겨요</p><div class="row"><div class="bubble">👚</div><div class="bubble">🧦</div><div class="bubble">🩰</div><div class="bubble">🎀</div></div><p class="sub">레오타드 · 타이츠 · 슈즈 · 머리 끈</p></div>
- <div class="scene" id="s4" style="align-items:flex-start;justify-content:flex-start;text-align:left;padding:5% 6%"><p class="big" style="font-size:clamp(22px,5vw,50px)" id="moveName">플리에</p><p class="sub" id="moveSub">무릎을 사뿐히 굽혀요</p></div>
- <div class="scene" id="s5"><p class="big" style="font-size:clamp(20px,4.6vw,48px)">유명한 작품도 만나요</p><div class="row"><div class="bubble">🦢</div><div class="bubble">🥜</div><div class="bubble">🌹</div><div class="bubble">👑</div></div><p class="sub">백조의 호수 · 호두까기 인형 · 지젤</p></div>
- <div class="scene" id="s6"><div class="pop"><p class="big">우리 같이 시작해요!</p><p class="sub">발레는 누구나 할 수 있어요 💖</p></div></div>
+ <div id="spot"></div><div id="floor"></div>
+ <div class="scene on" id="s0"><div class="pop"><p class="big" style="font-size:clamp(20px,4.6vw,52px)">백조를 꿈꾸는 오리를 위한<br>발레 가이드</p><p class="sub">처음 시작하는 취미 발레 101</p></div></div>
+ <div class="scene" id="s6"><div class="pop"><p class="big">오늘, 첫 플리에부터</p><p class="sub">발레는 누구나 시작할 수 있어요</p></div></div>
+ <div id="cap"><b id="moveName"></b><span id="moveSub"></span></div>
  <svg id="dancer" viewBox="0 0 200 300" style="opacity:0"></svg>
 </div>
 <div id="bar"><i></i></div>
